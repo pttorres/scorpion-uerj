@@ -110,10 +110,10 @@ void Dedao::setCurvatura(float curvatura)
 }
 ////////////////////////////////////////////////////
 
-class Mao
+class Torax
 {
 public:
-	Mao(float grossura);
+	Torax(float grossura);
 	void desenha();
 	void setCurvatura(int pata, float curv);
 	float getCurvatura(int pata) { return curvatura[pata]; }
@@ -141,7 +141,7 @@ protected:
 	float curvatura[8];
 };
 
-Mao::Mao(float gros)
+Torax::Torax(float gros)
 	: grossura(gros),
 	trazEsq1(7 * grossura, grossura),
 	trazEsq2(7 * grossura, grossura),
@@ -156,23 +156,9 @@ Mao::Mao(float gros)
 		curvatura[i] = 0;
 }
 
-/*
-void desenhaPata(int pataEscolhida, int lado) {
 
-}
-*/
-void Mao::desenha()
+void Torax::desenha()
 {
-	/*Criacao das patas 
-	for (int i = 0; i < 4; i++) {
-		if(i == 0){
-			glTranslatef(-2.0*grossura, 0.0, 0.0);
-		}
-		desenhaPata(i, 1);
-	}
-	for (int i = 0; i < 4; i++) {
-		desenhaPata(i, 2);
-	}*/
 
 	glPushMatrix();
 	glTranslatef(-2.0*grossura, 0.0, 0.0);
@@ -287,7 +273,7 @@ void Mao::desenha()
 	glPopMatrix();
 }
 
-void Mao::setCurvatura(int pata, float curv)
+void Torax::setCurvatura(int pata, float curv)
 {
 	curvatura[pata] = curv;
 
@@ -304,12 +290,12 @@ void Mao::setCurvatura(int pata, float curv)
 	}
 }
 
-void Mao::abrir(bool tudoJunto)
+void Torax::abrir(bool tudoJunto)
 {
 	if (tudoJunto)
-		for (int j = getCurvatura(1); j >= 0; j -= 5)
+		for (int j = getCurvatura(1); j >= 0; j -= 7)
 		{
-			for (int i = 4; i >= 0; i--)
+			for (int i = 7; i >= 0; i--)
 			{
 				setCurvatura(i, j);
 
@@ -317,9 +303,9 @@ void Mao::abrir(bool tudoJunto)
 			display();
 		}
 	else
-		for (int i = 4; i >= 0; i--)
+		for (int i = 7; i >= 0; i--)
 		{
-			for (int j = getCurvatura(i); j >= 0; j -= 5)
+			for (int j = getCurvatura(i); j >= 0; j -= 7)
 			{
 				setCurvatura(i, j);
 				display();
@@ -328,10 +314,10 @@ void Mao::abrir(bool tudoJunto)
 
 }
 
-void Mao::fechar(bool tudoJunto)
+void Torax::fechar(bool tudoJunto)
 {
 	if (tudoJunto)
-		for (int j = getCurvatura(1); j <= 100; j += 5)
+		for (int j = getCurvatura(1); j <= 100; j += 7)
 		{
 			for (int i = 0; i < 5; i++)
 			{
@@ -340,9 +326,9 @@ void Mao::fechar(bool tudoJunto)
 			display();
 		}
 	else
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 8; i++)
 		{
-			for (int j = getCurvatura(i); j <= 100; j += 5)
+			for (int j = getCurvatura(i); j <= 100; j += 7)
 			{
 				setCurvatura(i, j);
 				display();
@@ -350,7 +336,7 @@ void Mao::fechar(bool tudoJunto)
 		}
 }
 
-void Mao::tchau()
+void Torax::tchau()
 {
 	abrir(true);
 	for (int j = 0; j < 3; j++)
@@ -378,7 +364,7 @@ void Mao::tchau()
 	}
 }
 
-void Mao::fuck()
+void Torax::fuck()
 {
 	for (int i = 0; i < 180; i += 20)
 	{
@@ -394,7 +380,7 @@ void Mao::fuck()
 	}
 }
 
-void Mao::hangloose()
+void Torax::hangloose()
 {
 	fechar(true);
 	for (int j = getCurvatura(2); j >= 0; j -= 20)
@@ -433,7 +419,7 @@ void Mao::hangloose()
 		display();
 	}
 }
-void Mao::vemProPau()
+void Torax::vemProPau()
 {
 	abrir(true);
 	for (int i = 0; i < 180; i += 20)
@@ -479,7 +465,7 @@ void Mao::vemProPau()
 
 }
 
-void Mao::home()
+void Torax::home()
 {
 	abrir(true);
 
@@ -513,17 +499,17 @@ void Mao::home()
 
 }
 
-void Mao::dedoDuro()
+void Torax::dedoDuro()
 {
 }
 
-void Mao::positivo()
+void Torax::positivo()
 {
 }
 
 
 /////////////////////////////////////////////////////////////
-Mao m(1.0);
+Torax m(1.0);
 
 ///////////////////////////////////////////////////
 void init(void)
