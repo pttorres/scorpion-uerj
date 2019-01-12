@@ -156,19 +156,23 @@ Mao::Mao(float gros)
 		curvatura[i] = 0;
 }
 
-void desenhaPata(int pataEscolhida) {
+/*
+void desenhaPata(int pataEscolhida, int lado) {
 
 }
-
+*/
 void Mao::desenha()
 {
-	//Criacao das patas 
+	/*Criacao das patas 
 	for (int i = 0; i < 4; i++) {
+		if(i == 0){
+			glTranslatef(-2.0*grossura, 0.0, 0.0);
+		}
 		desenhaPata(i, 1);
 	}
 	for (int i = 0; i < 4; i++) {
 		desenhaPata(i, 2);
-	}
+	}*/
 
 	glPushMatrix();
 	glTranslatef(-2.0*grossura, 0.0, 0.0);
