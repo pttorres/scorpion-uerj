@@ -138,21 +138,21 @@ protected:
 	Pata dianDir1;
 	Pata dianDir2;
 	
-	float curvatura[5];
+	float curvatura[8];
 };
 
 Mao::Mao(float gros)
 	: grossura(gros),
-	trazEsq1(2 * grossura, grossura),
-	trazEsq2(2 * grossura, grossura),
-	trazDir1(2 * grossura, grossura),
-	trazDir2(2 * grossura, grossura),
-	dianEsq1(2 * grossura, grossura),
-	dianEsq2(2 * grossura, grossura),
-	dianDir1(2 * grossura, grossura),
-	dianDir2(2 * grossura, grossura)
+	trazEsq1(7 * grossura, grossura),
+	trazEsq2(7 * grossura, grossura),
+	trazDir1(7 * grossura, grossura),
+	trazDir2(7 * grossura, grossura),
+	dianEsq1(7 * grossura, grossura),
+	dianEsq2(7 * grossura, grossura),
+	dianDir1(7 * grossura, grossura),
+	dianDir2(7 * grossura, grossura)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 8; i++)
 		curvatura[i] = 0;
 }
 
@@ -297,7 +297,10 @@ void Mao::setCurvatura(int pata, float curv)
 	case 1: trazEsq2.setCurvatura(curv); break;
 	case 2: dianEsq1.setCurvatura(curv); break;
 	case 3: dianEsq2.setCurvatura(curv); break;
-	case 4: trazEsq1.setCurvatura(curv); break;
+	case 4: trazDir1.setCurvatura(curv); break;
+	case 5: trazDir2.setCurvatura(curv); break;
+	case 6: dianDir1.setCurvatura(curv); break;
+	case 7: dianDir2.setCurvatura(curv); break;
 	}
 }
 
