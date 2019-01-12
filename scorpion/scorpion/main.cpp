@@ -159,91 +159,91 @@ Torax::Torax(float gros)
 
 void Torax::desenha()
 {
+	/*Desenhando patas do lado Esquerdo*/
+	glPushMatrix();
+		glTranslatef(-2.0*grossura, 0.0, 0.0);
+	glPushMatrix(); 
+		glTranslatef(0.0, -3.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(80, 0.0, 0.0, 1.0);
+		glRotatef(20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		trazEsq1.desenha();
+	glPopMatrix();
+	glPushMatrix(); 
+		glTranslatef(0.0, -1.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(80, 0.0, 0.0, 1.0);
+		glRotatef(20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		trazEsq2.desenha();
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(0.0, 1.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(80, 0.0, 0.0, 1.0);
+		glRotatef(20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		dianEsq1.desenha();
+	glPopMatrix();
+	glPushMatrix(); 
+		glTranslatef(0.0, 3.0, 0.0);
+		glutSolidSphere(grossura, 3, 3); 
+		glRotatef(80, 0.0, 0.0, 1.0);
+		glRotatef(20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		dianEsq2.desenha();
+	glPopMatrix(); 
+	glPopMatrix();
 
-	glPushMatrix();  //Contexto 1
-	glTranslatef(-2.0*grossura, 0.0, 0.0);
-	glPushMatrix(); //Contexto 2
-	glTranslatef(0.0, -3.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(80, 0.0, 0.0, 1.0);
-	glRotatef(20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	trazEsq1.desenha();
-	glPopMatrix(); // Retorna para o Contexto 2
-	glPushMatrix(); //Contexto 3
-	glTranslatef(0.0, -1.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(80, 0.0, 0.0, 1.0);
-	glRotatef(20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	trazEsq2.desenha();
-	glPopMatrix();  // Retorna para o Contexto 2
-	glPushMatrix(); //Contexto 4
-	glTranslatef(0.0, 1.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(80, 0.0, 0.0, 1.0);
-	glRotatef(20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianEsq1.desenha();
-	glPopMatrix(); // Retorna para o Contexto 2
-	glPushMatrix(); //Contexto 5
-	glTranslatef(0.0, 3.0, 0.0);
-	glutSolidSphere(grossura, 3, 3); 
-	glRotatef(80, 0.0, 0.0, 1.0);
-	glRotatef(20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianEsq2.desenha();
-	glPopMatrix(); // Retorna para o Contexto 2
-	glPopMatrix(); // Retorna para o Contexto 1
-
+	/*Desenhando o Torax*/
 	glPushMatrix();
 	glScalef(3*grossura, 8 * grossura, 1.25*grossura);
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-
-	////////Lado direito
+	/*Desenhando patas do lado direito*/
 
 	glTranslatef(2.0*grossura, 0.0, 0.0);
 	glPushMatrix();
-	glTranslatef(0.0, -3.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(-80, 0.0, 0.0, 1.0);
-	glRotatef(-20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianEsq1.desenha();
+		glTranslatef(0.0, -3.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(-80, 0.0, 0.0, 1.0);
+		glRotatef(-20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		trazDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0.0, -1.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(-80, 0.0, 0.0, 1.0);
-	glRotatef(-20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianEsq2.desenha();
+		glTranslatef(0.0, -1.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(-80, 0.0, 0.0, 1.0);
+		glRotatef(-20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		trazDir2.desenha();
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0.0, 1.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(-80, 0.0, 0.0, 1.0);
-	glRotatef(-20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianDir1.desenha();
+		glTranslatef(0.0, 1.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(-80, 0.0, 0.0, 1.0);
+		glRotatef(-20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		dianDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(0.0, 3.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
-	glRotatef(-80, 0.0, 0.0, 1.0);
-	glRotatef(-20, 0.0, 1.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dianDir2.desenha();
+		glTranslatef(0.0, 3.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(-80, 0.0, 0.0, 1.0);
+		glRotatef(-20, 0.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		dianDir2.desenha();
 	glPopMatrix();
 	glPopMatrix();
 
@@ -554,44 +554,69 @@ void keyboard(unsigned char key, int x, int y)
 	{
 	case 'q':
 		if (m.getCurvatura(0) < 100)
-			m.setCurvatura(0, m.getCurvatura(0) + 5);
+			m.setCurvatura(0, m.getCurvatura(0) + 8);
 		break;
 	case 'a':
 		if (m.getCurvatura(0) > 0)
-			m.setCurvatura(0, m.getCurvatura(0) - 5);
+			m.setCurvatura(0, m.getCurvatura(0) - 8);
 		break;
 	case 'w':
 		if (m.getCurvatura(1) < 100)
-			m.setCurvatura(1, m.getCurvatura(1) + 5);
+			m.setCurvatura(1, m.getCurvatura(1) + 8);
 		break;
 	case 's':
 		if (m.getCurvatura(1) > 0)
-			m.setCurvatura(1, m.getCurvatura(1) - 5);
+			m.setCurvatura(1, m.getCurvatura(1) - 8);
 		break;
 	case 'e':
 		if (m.getCurvatura(2) < 100)
-			m.setCurvatura(2, m.getCurvatura(2) + 5);
+			m.setCurvatura(2, m.getCurvatura(2) + 8);
 		break;
 	case 'd':
 		if (m.getCurvatura(2) > 0)
-			m.setCurvatura(2, m.getCurvatura(2) - 5);
+			m.setCurvatura(2, m.getCurvatura(2) - 8);
 		break;
 	case 'r':
 		if (m.getCurvatura(3) < 100)
-			m.setCurvatura(3, m.getCurvatura(3) + 5);
+			m.setCurvatura(3, m.getCurvatura(3) + 8);
 		break;
 	case 'f':
 		if (m.getCurvatura(3) > 0)
-			m.setCurvatura(3, m.getCurvatura(3) - 5);
+			m.setCurvatura(3, m.getCurvatura(3) - 8);
 		break;
 	case 't':
 		if (m.getCurvatura(4) < 100)
-			m.setCurvatura(4, m.getCurvatura(4) + 5);
+			m.setCurvatura(4, m.getCurvatura(4) + 8);
 		break;
 	case 'g':
 		if (m.getCurvatura(4) > 0)
-			m.setCurvatura(4, m.getCurvatura(4) - 5);
+			m.setCurvatura(4, m.getCurvatura(4) - 8);
 		break;
+	case 'y':
+		if (m.getCurvatura(5) < 100)
+			m.setCurvatura(5, m.getCurvatura(5) + 8);
+		break;
+	case 'h':
+		if (m.getCurvatura(5) > 0)
+			m.setCurvatura(5, m.getCurvatura(5) - 8);
+		break;
+	case 'u':
+		if (m.getCurvatura(6) < 100)
+			m.setCurvatura(6, m.getCurvatura(6) + 8);
+		break;
+	case 'j':
+		if (m.getCurvatura(6) > 0)
+			m.setCurvatura(6, m.getCurvatura(6) - 8);
+		break;
+	case 'i':
+		if (m.getCurvatura(7) < 100)
+			m.setCurvatura(7, m.getCurvatura(7) + 8);
+		break;
+	case 'k':
+		if (m.getCurvatura(7) > 0)
+			m.setCurvatura(7, m.getCurvatura(7) - 8);
+		break;
+
 	case '.': //>
 		ang += 5;
 		if (ang > 360)
