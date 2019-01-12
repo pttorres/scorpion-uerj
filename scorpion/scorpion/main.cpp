@@ -160,9 +160,9 @@ Torax::Torax(float gros)
 void Torax::desenha()
 {
 
-	glPushMatrix();
+	glPushMatrix();  //Contexto 1
 	glTranslatef(-2.0*grossura, 0.0, 0.0);
-	glPushMatrix();
+	glPushMatrix(); //Contexto 2
 	glTranslatef(0.0, -3.0, 0.0);
 	glutSolidSphere(grossura, 3, 3);
 	glRotatef(80, 0.0, 0.0, 1.0);
@@ -170,8 +170,8 @@ void Torax::desenha()
 	glScalef(1, 1, 1);
 	glutSolidSphere(grossura, 8, 8);
 	trazEsq1.desenha();
-	glPopMatrix();
-	glPushMatrix();
+	glPopMatrix(); // Retorna para o Contexto 2
+	glPushMatrix(); //Contexto 3
 	glTranslatef(0.0, -1.0, 0.0);
 	glutSolidSphere(grossura, 3, 3);
 	glRotatef(80, 0.0, 0.0, 1.0);
@@ -179,8 +179,8 @@ void Torax::desenha()
 	glScalef(1, 1, 1);
 	glutSolidSphere(grossura, 8, 8);
 	trazEsq2.desenha();
-	glPopMatrix();
-	glPushMatrix();
+	glPopMatrix();  // Retorna para o Contexto 2
+	glPushMatrix(); //Contexto 4
 	glTranslatef(0.0, 1.0, 0.0);
 	glutSolidSphere(grossura, 3, 3);
 	glRotatef(80, 0.0, 0.0, 1.0);
@@ -188,17 +188,23 @@ void Torax::desenha()
 	glScalef(1, 1, 1);
 	glutSolidSphere(grossura, 8, 8);
 	dianEsq1.desenha();
-	glPopMatrix();
-	glPushMatrix();
+	glPopMatrix(); // Retorna para o Contexto 2
+	glPushMatrix(); //Contexto 5
 	glTranslatef(0.0, 3.0, 0.0);
-	glutSolidSphere(grossura, 3, 3);
+	glutSolidSphere(grossura, 3, 3); 
 	glRotatef(80, 0.0, 0.0, 1.0);
 	glRotatef(20, 0.0, 1.0, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(grossura, 8, 8);
 	dianEsq2.desenha();
+	glPopMatrix(); // Retorna para o Contexto 2
+	glPopMatrix(); // Retorna para o Contexto 1
+
+	glPushMatrix();
+	glScalef(3*grossura, 8 * grossura, 1.25*grossura);
+	glutSolidCube(1.0);
 	glPopMatrix();
-	glPopMatrix();
+
 
 	////////Lado direito
 
@@ -240,37 +246,7 @@ void Torax::desenha()
 	dianDir2.desenha();
 	glPopMatrix();
 	glPopMatrix();
-	/*glTranslatef(-1.5*grossura, 0.0, 0.0);
-	glutSolidSphere(grossura, 8, 8);
-	glRotatef(curvatura[1] * 0.9, 1.0, 0.0, 0.0);
-	anelar.desenha();
-	glPopMatrix();
-	glPushMatrix();
-	glutSolidSphere(grossura, 8, 8);
-	glRotatef(curvatura[2] * 0.9, 1.0, 0.0, 0.0);
-	maior.desenha();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(1.5*grossura, 0.0, 0.0);
-	glutSolidSphere(grossura, 8, 8);
-	glRotatef(curvatura[3] * 0.9, 1.0, 0.0, 0.0);
-	indicador.desenha();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(2 * grossura, -4 * grossura, 0.0);
-	glRotatef(-80, 0.0, 0.0, 1.0);
-	glRotatef(-20, 0.0, 1.0, 0.0);
-	glRotatef(curvatura[4] * 0.5, 1.0, 0.0, 0.0);
-	glScalef(1, 1, 1);
-	glutSolidSphere(grossura, 8, 8);
-	dedao.desenha();
-	glPopMatrix();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(-0.75*grossura, 3.0*grossura, 0.0);
-	glScalef(5.5*grossura, 6.0*grossura, 1.25*grossura);
-	glutSolidCube(1.0);*/
-	glPopMatrix();
+
 }
 
 void Torax::setCurvatura(int pata, float curv)
