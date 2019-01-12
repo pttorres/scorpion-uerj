@@ -1,0 +1,30 @@
+﻿  main.cpp
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(43): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(51): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(77): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(85): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(86): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(102): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(109): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(162): warning C4244: 'argumento': conversão de 'double' para 'GLfloat', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(233): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(237): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(245): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(247): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(257): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(261): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(268): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(270): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(313): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(315): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(323): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(325): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(326): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(368): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(372): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(380): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(385): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(389): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(397): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+c:\users\piett\documents\cg-uerj\scorpion-uerj\scorpion\scorpion\main.cpp(487): warning C4305: 'argumento': truncamento de 'double' para 'GLfloat'
+  scorpion.vcxproj -> C:\Users\piett\Documents\CG-Uerj\scorpion-uerj\scorpion\Debug\scorpion.exe
