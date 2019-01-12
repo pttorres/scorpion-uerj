@@ -7,13 +7,10 @@
 #include <stdlib.h>
 #include <GL\glut.h>
 
-
-
 /////////   VARIÁVEIS GLOBAIS PARA OS ANGULOS////////////
 float ang = 0;
 float ang2 = 0;
 float ang3 = 0;
-
 
 void display();
 
@@ -82,9 +79,36 @@ Pata::Pata(float comprimento, float largura)
 
 void Pata::setCurvatura(float curvatura)
 {
-	a.setAngulo(curvatura*0.9);
-	b.setAngulo(curvatura*0.9);
+	a.setAngulo(curvatura*0.5);
+	b.setAngulo(curvatura*0.5);
 }
+
+class Pinca
+{
+public:
+	Pinca(float comprimento, float largura);
+	void desenha() { a.desenha(); }
+	void setCurvatura(float curvatura);
+	float getCurvatura() { return a.getAngulo() * 100 / 90; }
+
+protected:
+	Membro a, b, c;
+};
+
+Pinca::Pinca(float comprimento, float largura)
+	: a(comprimento*0.4, largura), b(comprimento*0.3, largura), c(comprimento*0.6, 2*largura)
+{
+	a.setConexcao(&b, 0.0);
+	b.setConexcao(&c, 0.0);
+}
+
+void Pinca::setCurvatura(float curvatura)
+{
+	a.setAngulo(curvatura*0.6);
+	b.setAngulo(curvatura*0.6);
+}
+
+
 ////////////////////////////////////////////////////////////
 class Dedao
 {
@@ -108,6 +132,9 @@ void Dedao::setCurvatura(float curvatura)
 {
 	a.setAngulo(curvatura*0.9);
 }
+
+
+
 ////////////////////////////////////////////////////
 
 class Torax
@@ -138,9 +165,13 @@ protected:
 	Pata dianDir1;
 	Pata dianDir2;
 	
+	Pinca pincaDir;
+	Pinca pincaEsq;
+
 	float curvatura[8];
 };
 
+/*Cria a estrutura e define o tamanho das patas*/
 Torax::Torax(float gros)
 	: grossura(gros),
 	trazEsq1(7 * grossura, grossura),
@@ -150,9 +181,11 @@ Torax::Torax(float gros)
 	dianEsq1(7 * grossura, grossura),
 	dianEsq2(7 * grossura, grossura),
 	dianDir1(7 * grossura, grossura),
-	dianDir2(7 * grossura, grossura)
+	dianDir2(7 * grossura, grossura),
+	pincaDir(8 * grossura, grossura),
+	pincaEsq(8 * grossura, grossura)
 {
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 12; i++)
 		curvatura[i] = 0;
 }
 
@@ -161,6 +194,29 @@ void Torax::desenha()
 {
 	/*Desenhando patas do lado Esquerdo*/
 	glPushMatrix();
+		glTranslatef(0.0, 3.0, 0.0);
+	glPushMatrix();
+		glTranslatef(-1.8, 0.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(100, 0.0, 0.0, 1.0);
+		glRotatef(-160, 1.0, 1.0, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		pincaEsq.desenha();
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(1.8, 0.0, 0.0);
+		glutSolidSphere(grossura, 3, 3);
+		glRotatef(100, 0.0, 0.0, 1.0);
+		glRotatef(-160, 1.0, 0.6, 0.0);
+		glScalef(1, 1, 1);
+		glutSolidSphere(grossura, 8, 8);
+		pincaDir.desenha();
+	glPopMatrix();
+	glPopMatrix();
+	glPushMatrix();
+
+
 		glTranslatef(-2.0*grossura, 0.0, 0.0);
 	glPushMatrix(); 
 		glTranslatef(0.0, -3.0, 0.0);
