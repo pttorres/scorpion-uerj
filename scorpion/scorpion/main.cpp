@@ -156,8 +156,20 @@ Mao::Mao(float gros)
 		curvatura[i] = 0;
 }
 
+void desenhaPata(int pataEscolhida) {
+
+}
+
 void Mao::desenha()
 {
+	//Criacao das patas 
+	for (int i = 0; i < 4; i++) {
+		desenhaPata(i, 1);
+	}
+	for (int i = 0; i < 4; i++) {
+		desenhaPata(i, 2);
+	}
+
 	glPushMatrix();
 	glTranslatef(-2.0*grossura, 0.0, 0.0);
 	glPushMatrix();
@@ -176,10 +188,68 @@ void Mao::desenha()
 	glRotatef(20, 0.0, 1.0, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(grossura, 8, 8);
-	trazEsq1.desenha();
+	trazEsq2.desenha();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.0, 1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianEsq1.desenha();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.0, 3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianEsq2.desenha();
+	glPopMatrix();
 	glPopMatrix();
 
+	////////Lado direito
 
+	glTranslatef(2.0*grossura, 0.0, 0.0);
+	glPushMatrix();
+	glTranslatef(0.0, -3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianEsq1.desenha();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.0, -1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianEsq2.desenha();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.0, 1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianDir1.desenha();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.0, 3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(grossura, 8, 8);
+	dianDir2.desenha();
+	glPopMatrix();
+	glPopMatrix();
 	/*glTranslatef(-1.5*grossura, 0.0, 0.0);
 	glutSolidSphere(grossura, 8, 8);
 	glRotatef(curvatura[1] * 0.9, 1.0, 0.0, 0.0);
@@ -223,7 +293,7 @@ void Mao::setCurvatura(int pata, float curv)
 	case 1: trazEsq2.setCurvatura(curv); break;
 	case 2: dianEsq1.setCurvatura(curv); break;
 	case 3: dianEsq2.setCurvatura(curv); break;
-	case 4: dianEsq1.setCurvatura(curv); break;
+	case 4: trazEsq1.setCurvatura(curv); break;
 	}
 }
 
