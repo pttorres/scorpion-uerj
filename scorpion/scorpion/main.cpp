@@ -92,14 +92,16 @@ public:
 	float getCurvatura() { return a.getAngulo() * 100 / 90; }
 
 protected:
-	Membro a, b, c;
+	Membro a, b, c, d;
 };
 
 Pinca::Pinca(float comprimento, float largura)
-	: a(comprimento*0.4, largura), b(comprimento*0.3, largura), c(comprimento*0.6, 2*largura)
+	: a(comprimento*0.35, largura), b(comprimento*0.25, largura), c(comprimento*0.55, 1.09*largura),
+	d(comprimento*0.4, 1.09*largura)
 {
 	a.setConexcao(&b, 0.0);
-	b.setConexcao(&c, 0.0);
+	b.setConexcao(&c, -90);
+	b.setConexcao(&d, 90);
 }
 
 void Pinca::setCurvatura(float curvatura)
@@ -182,8 +184,8 @@ Torax::Torax(float gros)
 	dianEsq2(7 * grossura, grossura),
 	dianDir1(7 * grossura, grossura),
 	dianDir2(7 * grossura, grossura),
-	pincaDir(8 * grossura, grossura),
-	pincaEsq(8 * grossura, grossura)
+	pincaDir(9 * grossura, grossura),
+	pincaEsq(9 * grossura, grossura)
 {
 	for (int i = 0; i < 12; i++)
 		curvatura[i] = 0;
