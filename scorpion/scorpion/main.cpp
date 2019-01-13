@@ -363,9 +363,9 @@ void Torax::setCurvatura(int pata, float curv)
 	case 5: trazDir2.setCurvatura(curv); break;
 	case 6: dianDir1.setCurvatura(curv); break;
 	case 7: dianDir2.setCurvatura(curv); break;
-	case 8: pincaDir.setCurvatura(curv); break;
+	case 8: cauda.setCurvatura(curv); break;
 	case 9: pincaEsq.setCurvatura(curv); break;
-	case 10: cauda.setCurvatura(curv); break;
+	case 10: pincaDir.setCurvatura(curv); break;
 	}
 }
 
