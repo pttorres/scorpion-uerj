@@ -204,7 +204,7 @@ protected:
 
 	Cauda cauda;
 
-	float curvatura[9];
+	float curvatura[11];
 };
 
 /*Cria a estrutura e define o tamanho das patas*/
@@ -222,7 +222,7 @@ Torax::Torax(float gros)
 	pincaEsq(8 * grossura, grossura*0.8),
 	cauda(-5 * grossura, grossura)
 {
-	for (int i = 0; i < 13; i++)
+	for (int i = 0; i < 12; i++)
 		curvatura[i] = 0;
 }
 
@@ -363,7 +363,9 @@ void Torax::setCurvatura(int pata, float curv)
 	case 5: trazDir2.setCurvatura(curv); break;
 	case 6: dianDir1.setCurvatura(curv); break;
 	case 7: dianDir2.setCurvatura(curv); break;
-	case 8: cauda.setCurvatura(curv); break;
+	case 8: pincaDir.setCurvatura(curv); break;
+	case 9: pincaEsq.setCurvatura(curv); break;
+	case 10: cauda.setCurvatura(curv); break;
 	}
 }
 
