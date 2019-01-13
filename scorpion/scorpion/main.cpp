@@ -7,10 +7,13 @@
 #include <stdlib.h>
 #include <GL\glut.h>
 
+
+
 /////////   VARIÁVEIS GLOBAIS PARA OS ANGULOS////////////
-float ang = 0;
+float ang = 180;
 float ang2 = 0;
 float ang3 = 0;
+
 
 void display();
 
@@ -47,7 +50,7 @@ void Membro::desenha()
 
 	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
 
-	glutSolidSphere(0.85*largura, 8, 8);        //desenha a bolinha
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
 
 	if (conexcao)
 	{
@@ -92,24 +95,53 @@ public:
 	float getCurvatura() { return a.getAngulo() * 100 / 90; }
 
 protected:
-	Membro a, b, c, d;
+	Membro a, b, c;
 };
 
 Pinca::Pinca(float comprimento, float largura)
-	: a(comprimento*0.35, largura), b(comprimento*0.25, largura), c(comprimento*0.55, 1.09*largura),
-	d(comprimento*0.4, 1.09*largura)
+	: a(comprimento*0.4, largura), b(comprimento*0.3, largura), c(comprimento*0.6, largura)
 {
 	a.setConexcao(&b, 0.0);
-	b.setConexcao(&c, -90);
-	b.setConexcao(&d, 90);
+	b.setConexcao(&c, 0.0);
 }
 
 void Pinca::setCurvatura(float curvatura)
 {
 	a.setAngulo(curvatura*0.6);
-	b.setAngulo(curvatura*0.6);
+	b.setAngulo(curvatura*0.2);
 }
 
+//Cauda------------
+class Cauda
+{
+public:
+	Cauda(float comprimento, float largura);
+	void desenha() { a.desenha(); }
+	void setCurvatura(float curvatura);
+	float getCurvatura() { return a.getAngulo() * 100 / 90; }
+
+protected:
+	Membro a, b, c, d, e;
+};
+
+Cauda::Cauda(float comprimento, float largura)
+	: a(comprimento*0.45, largura), b(comprimento*0.4, largura), c(comprimento*0.35, largura), d(comprimento*0.3, largura), e(comprimento*0.25, largura)
+{
+	a.setConexcao(&b, 0.0);
+	b.setConexcao(&c, 0.0);
+	c.setConexcao(&d, 0.0);
+	d.setConexcao(&e, 0.0);
+}
+
+void Cauda::setCurvatura(float curvatura)
+{
+	a.setAngulo(curvatura*0.9);
+	b.setAngulo(curvatura*0.9);
+	c.setAngulo(curvatura*0.9);
+	d.setAngulo(curvatura*0.9);
+}
+
+//------------------
 
 ////////////////////////////////////////////////////////////
 class Dedao
@@ -166,35 +198,38 @@ protected:
 	Pata dianEsq2;
 	Pata dianDir1;
 	Pata dianDir2;
-	
+
 	Pinca pincaDir;
 	Pinca pincaEsq;
 
-	float curvatura[8];
+	Cauda cauda;
+
+	float curvatura[9];
 };
 
 /*Cria a estrutura e define o tamanho das patas*/
 Torax::Torax(float gros)
 	: grossura(gros),
-	trazEsq1(7 * grossura, grossura),
-	trazEsq2(7 * grossura, grossura),
-	trazDir1(7 * grossura, grossura),
-	trazDir2(7 * grossura, grossura),
-	dianEsq1(7 * grossura, grossura),
-	dianEsq2(7 * grossura, grossura),
-	dianDir1(7 * grossura, grossura),
-	dianDir2(7 * grossura, grossura),
-	pincaDir(9 * grossura, grossura),
-	pincaEsq(9 * grossura, grossura)
+	trazEsq1(7 * grossura, grossura*0.8),
+	trazEsq2(7 * grossura, grossura*0.8),
+	trazDir1(7 * grossura, grossura*0.8),
+	trazDir2(7 * grossura, grossura*0.8),
+	dianEsq1(6 * grossura, grossura*0.8),
+	dianEsq2(5 * grossura, grossura*0.8),
+	dianDir1(6 * grossura, grossura*0.8),
+	dianDir2(5 * grossura, grossura*0.8),
+	pincaDir(8 * grossura, grossura*0.8),
+	pincaEsq(8 * grossura, grossura*0.8),
+	cauda(-5 * grossura, grossura)
 {
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 13; i++)
 		curvatura[i] = 0;
 }
 
 
 void Torax::desenha()
 {
-	/*Desenhando patas do lado Esquerdo*/
+	/*Desenhando as pinças*/
 	glPushMatrix();
 		glTranslatef(0.0, 3.0, 0.0);
 	glPushMatrix();
@@ -203,7 +238,7 @@ void Torax::desenha()
 		glRotatef(100, 0.0, 0.0, 1.0);
 		glRotatef(-160, 1.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		pincaEsq.desenha();
 	glPopMatrix();
 	glPushMatrix();
@@ -212,30 +247,30 @@ void Torax::desenha()
 		glRotatef(100, 0.0, 0.0, 1.0);
 		glRotatef(-160, 1.0, 0.6, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		pincaDir.desenha();
 	glPopMatrix();
 	glPopMatrix();
+
+	/*Desenhando patas do lado Esquerdo*/
 	glPushMatrix();
-
-
 		glTranslatef(-2.0*grossura, 0.0, 0.0);
-	glPushMatrix(); 
+		glPushMatrix();
 		glTranslatef(0.0, -3.0, 0.0);
 		glutSolidSphere(grossura, 3, 3);
 		glRotatef(80, 0.0, 0.0, 1.0);
 		glRotatef(20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		trazEsq1.desenha();
 	glPopMatrix();
-	glPushMatrix(); 
+	glPushMatrix();
 		glTranslatef(0.0, -1.0, 0.0);
 		glutSolidSphere(grossura, 3, 3);
 		glRotatef(80, 0.0, 0.0, 1.0);
 		glRotatef(20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		trazEsq2.desenha();
 	glPopMatrix();
 	glPushMatrix();
@@ -244,28 +279,34 @@ void Torax::desenha()
 		glRotatef(80, 0.0, 0.0, 1.0);
 		glRotatef(20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		dianEsq1.desenha();
 	glPopMatrix();
-	glPushMatrix(); 
+	glPushMatrix();
 		glTranslatef(0.0, 3.0, 0.0);
-		glutSolidSphere(grossura, 3, 3); 
+		glutSolidSphere(grossura, 3, 3);
 		glRotatef(80, 0.0, 0.0, 1.0);
 		glRotatef(20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		dianEsq2.desenha();
-	glPopMatrix(); 
+	glPopMatrix();
 	glPopMatrix();
 
 	/*Desenhando o Torax*/
 	glPushMatrix();
-	glScalef(3*grossura, 8 * grossura, 1.25*grossura);
-	glutSolidCube(1.0);
+		glScalef(3 * grossura, 8 * grossura, 1.25*grossura);
+		glutSolidCube(1.0);
+	glPopMatrix();
+
+	/*Desenhando a cauda */
+	glPushMatrix();
+		glTranslatef(0.0, -4.0, 0.0);
+		glutSolidSphere(grossura, 8, 8);
+		cauda.desenha();
 	glPopMatrix();
 
 	/*Desenhando patas do lado direito*/
-
 	glTranslatef(2.0*grossura, 0.0, 0.0);
 	glPushMatrix();
 		glTranslatef(0.0, -3.0, 0.0);
@@ -273,7 +314,7 @@ void Torax::desenha()
 		glRotatef(-80, 0.0, 0.0, 1.0);
 		glRotatef(-20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		trazDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
@@ -282,7 +323,7 @@ void Torax::desenha()
 		glRotatef(-80, 0.0, 0.0, 1.0);
 		glRotatef(-20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		trazDir2.desenha();
 	glPopMatrix();
 	glPushMatrix();
@@ -291,7 +332,7 @@ void Torax::desenha()
 		glRotatef(-80, 0.0, 0.0, 1.0);
 		glRotatef(-20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		dianDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
@@ -300,13 +341,14 @@ void Torax::desenha()
 		glRotatef(-80, 0.0, 0.0, 1.0);
 		glRotatef(-20, 0.0, 1.0, 0.0);
 		glScalef(1, 1, 1);
-		glutSolidSphere(grossura, 8, 8);
+		glutSolidSphere(0.9*grossura, 8, 8);
 		dianDir2.desenha();
 	glPopMatrix();
 	glPopMatrix();
 
 }
 
+//TODO: Remover curvatura da cauda do array. Deve ser uma propriedade da cauda
 void Torax::setCurvatura(int pata, float curv)
 {
 	curvatura[pata] = curv;
@@ -321,6 +363,7 @@ void Torax::setCurvatura(int pata, float curv)
 	case 5: trazDir2.setCurvatura(curv); break;
 	case 6: dianDir1.setCurvatura(curv); break;
 	case 7: dianDir2.setCurvatura(curv); break;
+	case 8: cauda.setCurvatura(curv); break;
 	}
 }
 
@@ -554,6 +597,7 @@ void init(void)
 	glDepthFunc(GL_LEQUAL);				// The Type Of Depth Test To Do
 	glEnable(GL_DEPTH_TEST);			// Enables Depth Testing
 	glShadeModel(GL_SMOOTH);			// Enables Smooth Color Shading
+	m.setCurvatura(8, 56); //define a posição inicial da cauda
 }
 
 void display(void)
@@ -577,7 +621,7 @@ void display(void)
 
 	glPushMatrix();
 
-	glTranslatef(0.0, -5.0, -15.0);
+	glTranslatef(0.0, -2.0, -15.0);
 	glRotatef(ang3, 0.0, 0.0, 1.0);
 	glRotatef(ang, 0.0, 1.0, 0.0);
 	glRotatef(ang2, 1.0, 0.0, 0.0);
@@ -672,9 +716,16 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'k':
 		if (m.getCurvatura(7) > 0)
-			m.setCurvatura(7, m.getCurvatura(7) - 8);
+			m.setCurvatura(7, m.getCurvatura(8) - 8);
 		break;
-
+	case 'o':
+		if (m.getCurvatura(8) < 65)
+			m.setCurvatura(8, m.getCurvatura(8) + 7);
+		break;
+	case 'l':
+		if (m.getCurvatura(8) > 0)
+			m.setCurvatura(8, m.getCurvatura(8) - 7);
+		break;
 	case '.': //>
 		ang += 5;
 		if (ang > 360)
@@ -716,9 +767,14 @@ void keyboard(unsigned char key, int x, int y)
 			ang3 -= 360;
 		break;
 	case '0':
-		ang3 -= 5;
-		if (ang3 < 0)
-			ang3 += 360;
+		ang -= 5;
+		if (ang < 0)
+			ang += 360;
+		break;
+	case 'z':
+		ang += 5;
+		if (ang > 360)
+			ang -= 360;
 		break;
 	case '1':
 		m.tchau();
@@ -752,7 +808,7 @@ int main(int argc, char** argv)
 	init();
 
 	printf("FullScreen?(y/n) ");
-		if (getchar() == 'y')
+	if (getchar() == 'y')
 		glutFullScreen();
 
 	glutIdleFunc(idle);
