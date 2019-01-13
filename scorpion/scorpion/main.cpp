@@ -231,118 +231,118 @@ void Torax::desenha()
 {
 	/*Desenhando as pinças*/
 	glPushMatrix();
-		glTranslatef(0.0, 3.0, 0.0);
+	glTranslatef(0.0, 3.0, 0.0);
 	glPushMatrix();
-		glTranslatef(-1.8, 0.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(100, 0.0, 0.0, 1.0);
-		glRotatef(-160, 1.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		pincaEsq.desenha();
+	glTranslatef(-1.8, 0.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(100, 0.0, 0.0, 1.0);
+	glRotatef(-160, 1.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	pincaEsq.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(1.8, 0.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(100, 0.0, 0.0, 1.0);
-		glRotatef(-160, 1.0, 0.6, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		pincaDir.desenha();
+	glTranslatef(1.8, 0.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(100, 0.0, 0.0, 1.0);
+	glRotatef(-160, 1.0, 0.6, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	pincaDir.desenha();
 	glPopMatrix();
 	glPopMatrix();
 
 	/*Desenhando patas do lado Esquerdo*/
 	glPushMatrix();
-		glTranslatef(-2.0*grossura, 0.0, 0.0);
-		glPushMatrix();
-		glTranslatef(0.0, -3.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(80, 0.0, 0.0, 1.0);
-		glRotatef(20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		trazEsq1.desenha();
+	glTranslatef(-2.0*grossura, 0.0, 0.0);
+	glPushMatrix();
+	glTranslatef(0.0, -3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	trazEsq1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, -1.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(80, 0.0, 0.0, 1.0);
-		glRotatef(20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		trazEsq2.desenha();
+	glTranslatef(0.0, -1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	trazEsq2.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, 1.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(80, 0.0, 0.0, 1.0);
-		glRotatef(20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		dianEsq1.desenha();
+	glTranslatef(0.0, 1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	dianEsq1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, 3.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(80, 0.0, 0.0, 1.0);
-		glRotatef(20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		dianEsq2.desenha();
+	glTranslatef(0.0, 3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(80, 0.0, 0.0, 1.0);
+	glRotatef(20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	dianEsq2.desenha();
 	glPopMatrix();
 	glPopMatrix();
 
 	/*Desenhando o Torax*/
 	glPushMatrix();
-		glScalef(3 * grossura, 8 * grossura, 1.25*grossura);
-		glutSolidCube(1.0);
+	glScalef(3 * grossura, 8 * grossura, 1.25*grossura);
+	glutSolidCube(1.0);
 	glPopMatrix();
 
 	/*Desenhando a cauda */
 	glPushMatrix();
-		glTranslatef(0.0, -4.0, 0.0);
-		glutSolidSphere(grossura, 8, 8);
-		cauda.desenha();
+	glTranslatef(0.0, -4.0, 0.0);
+	glutSolidSphere(grossura, 8, 8);
+	cauda.desenha();
 	glPopMatrix();
 
 	/*Desenhando patas do lado direito*/
 	glTranslatef(2.0*grossura, 0.0, 0.0);
 	glPushMatrix();
-		glTranslatef(0.0, -3.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(-80, 0.0, 0.0, 1.0);
-		glRotatef(-20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		trazDir1.desenha();
+	glTranslatef(0.0, -3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	trazDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, -1.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(-80, 0.0, 0.0, 1.0);
-		glRotatef(-20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		trazDir2.desenha();
+	glTranslatef(0.0, -1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	trazDir2.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, 1.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(-80, 0.0, 0.0, 1.0);
-		glRotatef(-20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		dianDir1.desenha();
+	glTranslatef(0.0, 1.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	dianDir1.desenha();
 	glPopMatrix();
 	glPushMatrix();
-		glTranslatef(0.0, 3.0, 0.0);
-		glutSolidSphere(grossura, 3, 3);
-		glRotatef(-80, 0.0, 0.0, 1.0);
-		glRotatef(-20, 0.0, 1.0, 0.0);
-		glScalef(1, 1, 1);
-		glutSolidSphere(0.9*grossura, 8, 8);
-		dianDir2.desenha();
+	glTranslatef(0.0, 3.0, 0.0);
+	glutSolidSphere(grossura, 3, 3);
+	glRotatef(-80, 0.0, 0.0, 1.0);
+	glRotatef(-20, 0.0, 1.0, 0.0);
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	dianDir2.desenha();
 	glPopMatrix();
 	glPopMatrix();
 
@@ -586,18 +586,25 @@ void Torax::positivo()
 
 
 /////////////////////////////////////////////////////////////
-Torax m(1.0);
+Torax t(1.0);
+
+void defineCurvaturaInicial()
+{
+	t.setCurvatura(8, 56); //define a posição inicial da cauda
+	for (int i = 0; i < 8; i++)
+		t.setCurvatura(i, 64); //define a posição inicial das patas
+}
 
 ///////////////////////////////////////////////////
 void init(void)
 {
-
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
 	glDepthFunc(GL_LEQUAL);				// The Type Of Depth Test To Do
 	glEnable(GL_DEPTH_TEST);			// Enables Depth Testing
 	glShadeModel(GL_SMOOTH);			// Enables Smooth Color Shading
-	m.setCurvatura(8, 56); //define a posição inicial da cauda
+
+	defineCurvaturaInicial();
 }
 
 void display(void)
@@ -627,7 +634,7 @@ void display(void)
 	glRotatef(ang2, 1.0, 0.0, 0.0);
 	glColor3f(1.0, 0.8, 0);
 
-	m.desenha();
+	t.desenha();
 
 	glPopMatrix();
 
@@ -655,76 +662,76 @@ void keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'q':
-		if (m.getCurvatura(0) < 100)
-			m.setCurvatura(0, m.getCurvatura(0) + 8);
+		if (t.getCurvatura(0) < 100)
+			t.setCurvatura(0, t.getCurvatura(0) + 8);
 		break;
 	case 'a':
-		if (m.getCurvatura(0) > 0)
-			m.setCurvatura(0, m.getCurvatura(0) - 8);
+		if (t.getCurvatura(0) > 0)
+			t.setCurvatura(0, t.getCurvatura(0) - 8);
 		break;
 	case 'w':
-		if (m.getCurvatura(1) < 100)
-			m.setCurvatura(1, m.getCurvatura(1) + 8);
+		if (t.getCurvatura(1) < 100)
+			t.setCurvatura(1, t.getCurvatura(1) + 8);
 		break;
 	case 's':
-		if (m.getCurvatura(1) > 0)
-			m.setCurvatura(1, m.getCurvatura(1) - 8);
+		if (t.getCurvatura(1) > 0)
+			t.setCurvatura(1, t.getCurvatura(1) - 8);
 		break;
 	case 'e':
-		if (m.getCurvatura(2) < 100)
-			m.setCurvatura(2, m.getCurvatura(2) + 8);
+		if (t.getCurvatura(2) < 100)
+			t.setCurvatura(2, t.getCurvatura(2) + 8);
 		break;
 	case 'd':
-		if (m.getCurvatura(2) > 0)
-			m.setCurvatura(2, m.getCurvatura(2) - 8);
+		if (t.getCurvatura(2) > 0)
+			t.setCurvatura(2, t.getCurvatura(2) - 8);
 		break;
 	case 'r':
-		if (m.getCurvatura(3) < 100)
-			m.setCurvatura(3, m.getCurvatura(3) + 8);
+		if (t.getCurvatura(3) < 100)
+			t.setCurvatura(3, t.getCurvatura(3) + 8);
 		break;
 	case 'f':
-		if (m.getCurvatura(3) > 0)
-			m.setCurvatura(3, m.getCurvatura(3) - 8);
+		if (t.getCurvatura(3) > 0)
+			t.setCurvatura(3, t.getCurvatura(3) - 8);
 		break;
 	case 't':
-		if (m.getCurvatura(4) < 100)
-			m.setCurvatura(4, m.getCurvatura(4) + 8);
+		if (t.getCurvatura(4) < 100)
+			t.setCurvatura(4, t.getCurvatura(4) + 8);
 		break;
 	case 'g':
-		if (m.getCurvatura(4) > 0)
-			m.setCurvatura(4, m.getCurvatura(4) - 8);
+		if (t.getCurvatura(4) > 0)
+			t.setCurvatura(4, t.getCurvatura(4) - 8);
 		break;
 	case 'y':
-		if (m.getCurvatura(5) < 100)
-			m.setCurvatura(5, m.getCurvatura(5) + 8);
+		if (t.getCurvatura(5) < 100)
+			t.setCurvatura(5, t.getCurvatura(5) + 8);
 		break;
 	case 'h':
-		if (m.getCurvatura(5) > 0)
-			m.setCurvatura(5, m.getCurvatura(5) - 8);
+		if (t.getCurvatura(5) > 0)
+			t.setCurvatura(5, t.getCurvatura(5) - 8);
 		break;
 	case 'u':
-		if (m.getCurvatura(6) < 100)
-			m.setCurvatura(6, m.getCurvatura(6) + 8);
+		if (t.getCurvatura(6) < 100)
+			t.setCurvatura(6, t.getCurvatura(6) + 8);
 		break;
 	case 'j':
-		if (m.getCurvatura(6) > 0)
-			m.setCurvatura(6, m.getCurvatura(6) - 8);
+		if (t.getCurvatura(6) > 0)
+			t.setCurvatura(6, t.getCurvatura(6) - 8);
 		break;
 	case 'i':
-		if (m.getCurvatura(7) < 100)
-			m.setCurvatura(7, m.getCurvatura(7) + 8);
+		if (t.getCurvatura(7) < 100)
+			t.setCurvatura(7, t.getCurvatura(7) + 8);
 		break;
 	case 'k':
-		if (m.getCurvatura(7) > 0)
-			m.setCurvatura(7, m.getCurvatura(8) - 8);
+		if (t.getCurvatura(7) > 0)
+			t.setCurvatura(7, t.getCurvatura(8) - 8);
 		break;
 	case 'o':
-		if (m.getCurvatura(8) < 65)
-			m.setCurvatura(8, m.getCurvatura(8) + 7);
+		if (t.getCurvatura(8) < 65)
+			t.setCurvatura(8, t.getCurvatura(8) + 7);
 		break;
 	case 'l':
-		if (m.getCurvatura(8) > 0)
-			m.setCurvatura(8, m.getCurvatura(8) - 7);
+		if (t.getCurvatura(8) > 0)
+			t.setCurvatura(8, t.getCurvatura(8) - 7);
 		break;
 	case '.': //>
 		ang += 5;
@@ -747,16 +754,16 @@ void keyboard(unsigned char key, int x, int y)
 			ang2 += 360;
 		break;
 	case '+':
-		m.abrir();
+		t.abrir();
 		break;
 	case '*':
-		m.abrir(true);
+		t.abrir(true);
 		break;
 	case '/':
-		m.fechar(true);
+		t.fechar(true);
 		break;
 	case '-':
-		m.fechar();
+		t.fechar();
 		break;
 	case 27: //ESC
 		exit(0);
@@ -777,19 +784,19 @@ void keyboard(unsigned char key, int x, int y)
 			ang -= 360;
 		break;
 	case '1':
-		m.tchau();
+		t.tchau();
 		break;
 	case '2':
-		m.fuck();
+		t.fuck();
 		break;
 	case '3':
-		m.hangloose();
+		t.hangloose();
 		break;
 	case '4':
-		m.vemProPau();
+		t.vemProPau();
 		break;
 	case 8:
-		m.home();
+		t.home();
 		break;
 
 	default:
