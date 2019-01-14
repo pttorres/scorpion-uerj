@@ -143,6 +143,34 @@ void Cauda::setCurvatura(float curvatura)
 
 //------------------
 
+////////////////////////////////////////////////////////////
+class Dedao
+{
+public:
+	Dedao(float comprimento, float largura);
+	void desenha() { a.desenha(); }
+	void setCurvatura(float curvatura);
+	float getCurvatura() { return a.getAngulo() * 100 / 90; }
+
+protected:
+	Membro a, b;
+};
+
+Dedao::Dedao(float comprimento, float largura)
+	: a(comprimento*0.5, largura), b(comprimento*0.5, largura)
+{
+	a.setConexcao(&b, 0.0);
+}
+
+void Dedao::setCurvatura(float curvatura)
+{
+	a.setAngulo(curvatura*0.9);
+}
+
+
+
+////////////////////////////////////////////////////
+
 class Torax
 {
 public:
@@ -159,6 +187,7 @@ public:
 	void positivo();
 	void vemProPau();
 	void home();
+	void andar();
 protected:
 	float grossura;
 
@@ -558,9 +587,41 @@ void Torax::positivo()
 {
 }
 
-
 /////////////////////////////////////////////////////////////
 Torax t(1.0);
+
+bool andarAux = false;
+void Torax::andar()
+{
+	float curv = t.getCurvatura(0);
+	float curvOne = 64, curvTwo = 56, curvThree = 48;
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (curv != curvOne && curv != curvTwo && curv != curvThree)
+		{
+			t.setCurvatura(i, curvOne);
+			break;
+		}
+	}
+
+	if (andarAux)
+		curv += 8;
+	else
+		curv -= 8;
+
+	for (int i = 0; i < 4; i++)
+	{
+		t.setCurvatura(i, curv);
+		t.setCurvatura(4 + i, curv);
+	}
+
+	if (curv == curvThree)
+		andarAux = true;
+
+	if (curv == curvOne)
+		andarAux = false;
+}
 
 void defineCurvaturaInicial()
 {
@@ -707,6 +768,9 @@ void keyboard(unsigned char key, int x, int y)
 		if (t.getCurvatura(8) > 0)
 			t.setCurvatura(8, t.getCurvatura(8) - 7);
 		break;
+	case 'z':
+		t.andar();
+		break;
 	case '.': //>
 		ang += 5;
 		if (ang > 360)
@@ -752,7 +816,7 @@ void keyboard(unsigned char key, int x, int y)
 		if (ang < 0)
 			ang += 360;
 		break;
-	case 'z':
+	case 'v':
 		ang += 5;
 		if (ang > 360)
 			ang -= 360;
