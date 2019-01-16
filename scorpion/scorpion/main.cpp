@@ -13,7 +13,8 @@
 float ang = 180;
 float ang2 = 0;
 float ang3 = 0;
-
+GLfloat zoom = 55.0;
+GLfloat fAspect;
 
 void display();
 
@@ -154,7 +155,7 @@ void Garra::desenha()
 	glPopMatrix();    //restaura o contexto(2)
 	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
 	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
-	
+
 	glRotatef(angPinca*distanciaP1, 0.0, 0.0, 1.0);
 	glPushMatrix();  //salva o contexto(1)
 	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
@@ -546,6 +547,14 @@ void display(void)
 	glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 50);
 	//////////////////////////////////////////////////////////////////////////
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	gluPerspective(zoom, fAspect, 1.0, 40.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glTranslatef(0.0, 0.0, -10.0);
+
 	glPushMatrix();
 
 	glTranslatef(0.0, -2.0, -15.0);
@@ -561,17 +570,16 @@ void display(void)
 	glutSwapBuffers();
 }
 
-void reshape(int w, int h)
+// Função callback chamada quando o tamanho da janela é alterado
+void reshape(GLsizei w, GLsizei h)
 {
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(55.0, (GLfloat)w / (GLfloat)h, 1.0, 40.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0, 0.0, -10.0);
-}
+	if (h == 0) h = 1;
 
+	glViewport(0, 0, w, h);
+
+	fAspect = (GLfloat)w / (GLfloat)h;
+	glutPostRedisplay();
+}
 
 void idle()
 {
@@ -712,6 +720,19 @@ void keyboard(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+void GerenciaMouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON)
+		if (state == GLUT_DOWN) { // Zoom-in
+			if (zoom >= 10) zoom -= 5;
+		}
+	if (button == GLUT_RIGHT_BUTTON)
+		if (state == GLUT_DOWN) { // Zoom-out
+			if (zoom <= 130) zoom += 5;
+		}
+	glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -729,6 +750,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(GerenciaMouse);
 	glutMainLoop();
 	return 0;
 }
