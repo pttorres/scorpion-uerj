@@ -86,28 +86,91 @@ void Pata::setCurvatura(float curvatura)
 	b.setAngulo(curvatura*0.5);
 }
 
+class Garra
+{
+public:
+	Garra(float a, float l) : largura(l), altura(a), conexcao(0) {}
+	void desenha(bool opGarra, int countSeg);
+
+	void setConexcao(Garra *garra, float ang) { conexcao = garra, angulo = ang; }
+
+	void setAngulo(float ang) { angulo = ang; }
+	void setAnguloPinca(float anguloPinca) { angPinca = anguloPinca; }
+	float getAngulo() { return angulo; }
+
+protected:
+	float largura;
+	float altura;
+
+	float angulo;
+	float angPinca;
+	Garra *conexcao;
+};
+
+void Garra::desenha(bool opGarra, int countSeg)
+{
+	glPushMatrix();  //salva o contexto(1)
+	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
+	glPushMatrix();   //salva o contexto(2)
+	glScalef(largura, altura, largura);  //escala para o tamanho do Membro
+	glutSolidCube(largura);    //desenha o Membro
+	glPopMatrix();    //restaura o contexto(2)
+	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
+	glRotatef(angulo, 1.0, 0.0, 0.0); //rotaciona para o angulo da conexcao
+
+	glPushMatrix();  //salva o contexto(1)
+	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
+	glPushMatrix();   //salva o contexto(2)
+	glScalef(largura, altura, largura);  //escala para o tamanho do Membro
+	glutSolidCube(largura);    //desenha o Membro
+	glPopMatrix();    //restaura o contexto(2)
+	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
+	glRotatef(angulo, 90, 0.0, 0.0);
+
+	
+	glPushMatrix();  //salva o contexto(1)
+	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
+	glPushMatrix();   //salva o contexto(2)
+	glScalef(largura, altura, largura);  //escala para o tamanho do Membro
+	glutSolidCube(largura);    //desenha o Membro
+	glPopMatrix();    //restaura o contexto(2)
+	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
+	glRotatef(angPinca, -70, 0.0, 0.0);
+
+
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();  //restaura o contexto(1)
+};
+
 class Pinca
 {
 public:
 	Pinca(float comprimento, float largura);
-	void desenha() { a.desenha(); }
+	void desenha(bool opGarra) { a.desenha(opGarra, 1); }
 	void setCurvatura(float curvatura);
 	float getCurvatura() { return a.getAngulo() * 100 / 90; }
 
 protected:
-	Membro a, b, c;
+	Garra a, b;
 };
 
+
+
 Pinca::Pinca(float comprimento, float largura)
-	: a(comprimento*0.4, largura), b(comprimento*0.3, largura), c(comprimento*0.6, largura)
+	: a(comprimento*0.4, largura), b(comprimento*0.4, largura)
 {
-	a.setConexcao(&b, 0.0);
-	b.setConexcao(&c, 0.0);
+	a.setConexcao(&b, 0.5);
+	a.setAnguloPinca(40);
 }
 
 void Pinca::setCurvatura(float curvatura)
 {
 	a.setAngulo(curvatura*0.6);
+	a.setAnguloPinca(curvatura*0.6);
 	b.setAngulo(curvatura*0.2);
 }
 
@@ -142,35 +205,6 @@ void Cauda::setCurvatura(float curvatura)
 }
 
 //------------------
-
-////////////////////////////////////////////////////////////
-class Dedao
-{
-public:
-	Dedao(float comprimento, float largura);
-	void desenha() { a.desenha(); }
-	void setCurvatura(float curvatura);
-	float getCurvatura() { return a.getAngulo() * 100 / 90; }
-
-protected:
-	Membro a, b;
-};
-
-Dedao::Dedao(float comprimento, float largura)
-	: a(comprimento*0.5, largura), b(comprimento*0.5, largura)
-{
-	a.setConexcao(&b, 0.0);
-}
-
-void Dedao::setCurvatura(float curvatura)
-{
-	a.setAngulo(curvatura*0.9);
-}
-
-
-
-////////////////////////////////////////////////////
-
 class Torax
 {
 public:
@@ -180,13 +214,6 @@ public:
 	float getCurvatura(int pata) { return curvatura[pata]; }
 	void abrir(bool tudoJunto = false);
 	void fechar(bool tudoJunto = false);
-	void tchau();
-	void fuck();
-	void hangloose();
-	void dedoDuro();
-	void positivo();
-	void vemProPau();
-	void home();
 	void andar();
 protected:
 	float grossura;
@@ -202,6 +229,7 @@ protected:
 
 	Pinca pincaDir;
 	Pinca pincaEsq;
+	Pinca garraDir;
 
 	Cauda cauda;
 
@@ -221,9 +249,10 @@ Torax::Torax(float gros)
 	dianDir2(5 * grossura, grossura*0.8),
 	pincaDir(8 * grossura, grossura*0.8),
 	pincaEsq(8 * grossura, grossura*0.8),
+	garraDir(6 * grossura, grossura*0.8),
 	cauda(-5 * grossura, grossura)
 {
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 13; i++)
 		curvatura[i] = 0;
 }
 
@@ -240,7 +269,7 @@ void Torax::desenha()
 	glRotatef(-160, 1.0, 1.0, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(0.9*grossura, 8, 8);
-	pincaEsq.desenha();
+	pincaEsq.desenha(true);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(1.8, 0.0, 0.0);
@@ -249,7 +278,16 @@ void Torax::desenha()
 	glRotatef(-160, 1.0, 0.6, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(0.9*grossura, 8, 8);
-	pincaDir.desenha();
+	pincaDir.desenha(true);
+
+	/*Desenho da gara
+	glRotatef(100, 0.0, 0.0, 1.0);
+	glRotatef(-90, 1.0, 0.6, 0.0);
+
+	glScalef(1, 1, 1);
+	glutSolidSphere(0.9*grossura, 8, 8);
+	garraDir.desenha(true);*/
+
 	glPopMatrix();
 	glPopMatrix();
 
@@ -399,7 +437,7 @@ void Torax::fechar(bool tudoJunto)
 	if (tudoJunto)
 		for (int j = getCurvatura(1); j <= 100; j += 7)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 8; i++)
 			{
 				setCurvatura(i, j);
 			}
@@ -414,177 +452,6 @@ void Torax::fechar(bool tudoJunto)
 				display();
 			}
 		}
-}
-
-void Torax::tchau()
-{
-	abrir(true);
-	for (int j = 0; j < 3; j++)
-	{
-		ang3 += 5;
-		display();
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 6; j++)
-		{
-			ang3 -= 5;
-			display();
-		}
-		for (int j = 0; j < 6; j++)
-		{
-			ang3 += 5;
-			display();
-		}
-	}
-	for (int j = 0; j < 3; j++)
-	{
-		ang3 -= 5;
-		display();
-	}
-}
-
-void Torax::fuck()
-{
-	for (int i = 0; i < 180; i += 20)
-	{
-		ang += 20;
-		display();
-	}
-
-	fechar(true);
-	for (int j = getCurvatura(2); j >= 0; j -= 20)
-	{
-		setCurvatura(2, j);
-		display();
-	}
-}
-
-void Torax::hangloose()
-{
-	fechar(true);
-	for (int j = getCurvatura(2); j >= 0; j -= 20)
-	{
-		setCurvatura(0, j);
-		setCurvatura(4, j);
-		ang3 += 3;
-		display();
-	}
-	for (int j = 0; j < 3; j++)
-	{
-		ang += 5;
-		display();
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 6; j++)
-		{
-			ang -= 5;
-			display();
-		}
-		for (int j = 0; j < 6; j++)
-		{
-			ang += 5;
-			display();
-		}
-	}
-	for (int j = 0; j < 3; j++)
-	{
-		ang -= 5;
-		display();
-	}
-	for (int j = 0; j < 6; j++)
-	{
-		ang3 -= 3;
-		display();
-	}
-}
-void Torax::vemProPau()
-{
-	abrir(true);
-	for (int i = 0; i < 180; i += 20)
-	{
-		ang += 20;
-		ang2 -= 10;
-		display();
-	}
-	for (int j = getCurvatura(1); j <= 30; j += 10)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			setCurvatura(i, j);
-		}
-		display();
-	}
-	for (int j = 30; j >= 0; j -= 10)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			setCurvatura(i, j);
-		}
-		display();
-	}
-	//////////////
-	for (int j = getCurvatura(1); j <= 30; j += 10)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			setCurvatura(i, j);
-		}
-		display();
-	}
-	for (int j = 30; j >= 0; j -= 10)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			setCurvatura(i, j);
-		}
-		display();
-	}
-
-
-}
-
-void Torax::home()
-{
-	abrir(true);
-
-	if (ang < 0)
-		ang += 360;
-	if (ang2 < 0)
-		ang2 += 360;
-	if (ang3 < 0)
-		ang3 += 360;
-
-
-	while (ang > 0)
-	{
-		ang -= 10;
-		display();
-	}
-	ang = 0;
-	while (ang2 > 0)
-	{
-		ang2 -= 10;
-		display();
-	}
-	ang2 = 0;
-	while (ang3 > 0)
-	{
-		ang3 -= 10;
-		display();
-	}
-	ang3 = 0;
-	display();
-
-}
-
-void Torax::dedoDuro()
-{
-}
-
-void Torax::positivo()
-{
 }
 
 /////////////////////////////////////////////////////////////
@@ -821,22 +688,6 @@ void keyboard(unsigned char key, int x, int y)
 		if (ang > 360)
 			ang -= 360;
 		break;
-	case '1':
-		t.tchau();
-		break;
-	case '2':
-		t.fuck();
-		break;
-	case '3':
-		t.hangloose();
-		break;
-	case '4':
-		t.vemProPau();
-		break;
-	case 8:
-		t.home();
-		break;
-
 	default:
 		return;
 	}
