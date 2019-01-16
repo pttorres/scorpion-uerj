@@ -90,7 +90,7 @@ class Garra
 {
 public:
 	Garra(float a, float l) : largura(l), altura(a), conexcao(0) {}
-	void desenha(bool opGarra, int countSeg);
+	void desenha();
 
 	void setConexcao(Garra *garra, float ang) { conexcao = garra, angulo = ang; }
 
@@ -107,8 +107,10 @@ protected:
 	Garra *conexcao;
 };
 
-void Garra::desenha(bool opGarra, int countSeg)
+void Garra::desenha()
 {
+
+	float distanciaP1 = 0.9, distanciaP2 = 1.5;
 	glPushMatrix();  //salva o contexto(1)
 	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
 	glPushMatrix();   //salva o contexto(2)
@@ -119,6 +121,8 @@ void Garra::desenha(bool opGarra, int countSeg)
 	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
 	glRotatef(angulo, 1.0, 0.0, 0.0); //rotaciona para o angulo da conexcao
 
+	//Garra 
+	glRotatef(angPinca*distanciaP2, 0, 0, 2.0);
 	glPushMatrix();  //salva o contexto(1)
 	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
 	glPushMatrix();   //salva o contexto(2)
@@ -127,9 +131,31 @@ void Garra::desenha(bool opGarra, int countSeg)
 	glPopMatrix();    //restaura o contexto(2)
 	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
 	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
-	glRotatef(angulo, 90, 0.0, 0.0);
 
+	glRotatef(angPinca*distanciaP1, 0.0, 0.0, -1.0);
+	glPushMatrix();  //salva o contexto(1)
+	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
+	glPushMatrix();   //salva o contexto(2)
+	glScalef(largura, altura, largura);  //escala para o tamanho do Membro
+	glutSolidCube(largura);    //desenha o Membro
+	glPopMatrix();    //restaura o contexto(2)
+	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
+
+	glPopMatrix();
+	glPopMatrix();
+
+	glRotatef(angPinca*distanciaP2, 0, 0, -2.0);
+	glPushMatrix();  //salva o contexto(1)
+	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
+	glPushMatrix();   //salva o contexto(2)
+	glScalef(largura, altura, largura);  //escala para o tamanho do Membro
+	glutSolidCube(largura);    //desenha o Membro
+	glPopMatrix();    //restaura o contexto(2)
+	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
+	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
 	
+	glRotatef(angPinca*distanciaP1, 0.0, 0.0, 1.0);
 	glPushMatrix();  //salva o contexto(1)
 	glTranslatef(0.0, altura / 2.0, 0.0); //vai para o meio do Membro
 	glPushMatrix();   //salva o contexto(2)
@@ -138,19 +164,17 @@ void Garra::desenha(bool opGarra, int countSeg)
 	glPopMatrix();    //restaura o contexto(2)
 	glTranslatef(0.0, altura / 2.0, 0.0); // vai para a ponta do Membro
 	glutSolidSphere(0.8*largura, 8, 8);        //desenha a bolinha
-	glRotatef(angPinca, -70, 0.0, 0.0);
-
 
 	glPopMatrix();
 	glPopMatrix();
-	glPopMatrix();  //restaura o contexto(1)
+	glPopMatrix();  //restaura o contexto(1) A
 };
 
 class Pinca
 {
 public:
 	Pinca(float comprimento, float largura);
-	void desenha(bool opGarra) { a.desenha(opGarra, 1); }
+	void desenha() { a.desenha(); }
 	void setCurvatura(float curvatura);
 	float getCurvatura() { return a.getAngulo() * 100 / 90; }
 
@@ -247,8 +271,8 @@ Torax::Torax(float gros)
 	dianEsq2(5 * grossura, grossura*0.8),
 	dianDir1(6 * grossura, grossura*0.8),
 	dianDir2(5 * grossura, grossura*0.8),
-	pincaDir(8 * grossura, grossura*0.8),
-	pincaEsq(8 * grossura, grossura*0.8),
+	pincaDir(6 * grossura, grossura*0.8),
+	pincaEsq(6 * grossura, grossura*0.8),
 	garraDir(6 * grossura, grossura*0.8),
 	cauda(-5 * grossura, grossura)
 {
@@ -269,24 +293,16 @@ void Torax::desenha()
 	glRotatef(-160, 1.0, 1.0, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(0.9*grossura, 8, 8);
-	pincaEsq.desenha(true);
+	pincaEsq.desenha();
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(1.8, 0.0, 0.0);
 	glutSolidSphere(grossura, 3, 3);
-	glRotatef(100, 0.0, 0.0, 1.0);
+	glRotatef(100, 0.0, 0.0, 5.0);
 	glRotatef(-160, 1.0, 0.6, 0.0);
 	glScalef(1, 1, 1);
 	glutSolidSphere(0.9*grossura, 8, 8);
-	pincaDir.desenha(true);
-
-	/*Desenho da gara
-	glRotatef(100, 0.0, 0.0, 1.0);
-	glRotatef(-90, 1.0, 0.6, 0.0);
-
-	glScalef(1, 1, 1);
-	glutSolidSphere(0.9*grossura, 8, 8);
-	garraDir.desenha(true);*/
+	pincaDir.desenha();
 
 	glPopMatrix();
 	glPopMatrix();
@@ -465,10 +481,12 @@ void Torax::andar()
 
 	for (int i = 0; i < 8; i++)
 	{
-		if (curv != curvOne && curv != curvTwo && curv != curvThree)
+		if ((t.getCurvatura(i) != curvOne && t.getCurvatura(i) != curvTwo && t.getCurvatura(i) != curvThree) || (i > 0 && curv != t.getCurvatura(i)))
 		{
-			t.setCurvatura(i, curvOne);
-			break;
+			for (int j = 0; j < 8; j++)
+				t.setCurvatura(j, curvOne);
+			curv = curvOne;
+			andarAux = false;
 		}
 	}
 
